@@ -3,10 +3,29 @@
 
 
 {% block header %}
+  <!--Carousel-->
+  <div id="carouselExampleCaptions" class="carousel" data-bs-ride="carousel">
+    <div class="carousel-inner mb-4">
+      <div class="carousel-item active">
+        <img src="{% static 'assets/img/NASA-banner.jpg' %}" class="d-block w-100 rounded img-banner" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <div class="col-md-8 px-0" style="text-align: left;">
+              <h1 class="display-4 fst-italic">Astronomy Picture of the Day</h1>
+              <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+            </div>
+        </div>
+      </div>
+  </div>
 {% endblock header %}
 
 
 {% block content %}
-    <img src="{{ apod.hdurl }}" alt="">
-    <p>{{ apod.explanation }}</p>
+<article class="blog-post">
+    <h2 class="blog-post-title">{{ apod.title }}</h2>
+    <p class="blog-post-meta">{{ apod.date }} by <a href="#">{{ apod.copyright }}</a></p>
+    <div class="container">
+        <img src="{{ apod.hdurl }}" class="w-100 rounded img-fluid" alt="">
+        <p>{{ apod.explanation }}</p>
+    </div>
+</article>
 {% endblock content %}
