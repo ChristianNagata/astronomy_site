@@ -26,12 +26,12 @@
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-primary">APOD</strong>
           <h3 class="mb-0">Astronomy Picture of the Day</h3>
-          <div class="mb-1 text-muted">Updated: Nov 12</div>
+          <div class="mb-1 text-muted">Updated: {{ apod.date }}</div>
           <p class="card-text mb-auto">One of the most popular websites at NASA is the Astronomy Picture of the Day.</p>
           <a href="{% url 'apod' %}" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+          <img src="{{ apod.hdurl }}" width="200" height="250" style="object-fit: cover;" alt="">
         </div>
       </div>
     </div>
@@ -44,11 +44,10 @@
           <h3 class="mb-0">Mars Rover Photos</h3>
           <div class="mb-1 text-muted">Updated: Nov 11</div>
           <p class="mb-auto">Image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars.</p>
-          <a href="#" class="stretched-link">Continue reading</a>
+          <a href="{% url 'mars_rover_photos' %}" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-        </div>
+          <img src="{% static 'assets/img/Curiosity.jpg' %}" width="200" height="250" style="object-fit: cover;" alt="">
       </div>
     </div>
 
@@ -186,7 +185,8 @@
       <div class="position-sticky" style="top: 2rem;">
         <div class="p-4 mb-3 bg-light rounded">
           <h4 class="fst-italic">About</h4>
-          <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
+          <p class="mb-0">Site based on NASA Open APIs.</p>
+          <p class="mb-0">Find more about on <a href="https://api.nasa.gov/">https://api.nasa.gov/</a>.</p>
         </div>
 
         <div class="p-4">

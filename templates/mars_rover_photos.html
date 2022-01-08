@@ -1,6 +1,71 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
 
+{% block header %}
+  <!--Carousel-->
+  <div id="carouselExampleCaptions" class="carousel" data-bs-ride="carousel">
+    <div class="carousel-inner mb-4">
+      <div class="carousel-item active">
+        <img src="{% static 'assets/img/NASA-banner.jpg' %}" class="d-block w-100 rounded img-banner" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <div class="col-md-8 px-0" style="text-align: left;">
+              <h1 class="display-4 fst-italic">Mars Rover Photos</h1>
+              <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+            </div>
+        </div>
+      </div>
+  </div>
+{% endblock header %}
+
+{% block content %}
+<!-- Gallery -->
+<div class="row">
+{% for photo in mrp %}
+    <div class="col-lg-2 mb-4 mb-lg-0">
+        <a href="" ><img
+            src="{{ photo.img_src }}"
+            class="w-100 shadow-1-strong rounded mb-4"
+            alt=""
+        /></a>
+    </div>
+{% endfor %}
+</div>
+
+<!--Paginação-->
+<nav aria-label="Page navigation example">
+    <ul class="pagination p-3 justify-content-center">
+        {% if mrp.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1" aria-label="Previous">
+                  <span aria-hidden="true">First</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ mrp.previous_page_number }}" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+            <li class="page-item">
+                <span class="page-link current">
+                    Page {{ mrp.number }} of {{ mrp.paginator.num_pages }}.
+                </span>
+            </li>
+
+        {% if mrp.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ mrp.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ mrp.paginator.num_pages }}" aria-label="Last">
+                    <span aria-hidden="true">Last</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
 {% endblock content %}
