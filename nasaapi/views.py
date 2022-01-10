@@ -24,7 +24,7 @@ def index(request):
     news = news.json()
     news = news['results']
 
-    context = {'apod': info, 'news': news}
+    context = {'apod': info, 'news': news, 'page_name': 'Home'}
     return render(request, 'index.html', context)
 
 
@@ -34,7 +34,7 @@ def apod(request):
     info = requests.get(
         f'https://api.nasa.gov/planetary/apod?api_key={nasa_api_key}')
     info = info.json()
-    context = {'apod': info}
+    context = {'apod': info, 'page_name': 'APOD'}
 
     return render(request, 'apod.html', context)
 
@@ -52,6 +52,6 @@ def mars_rover_photos(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    context = {'mrp': page_obj}
+    context = {'mrp': page_obj, 'page_name': 'Mars Photos'}
 
     return render(request, 'mars_rover_photos.html', context)

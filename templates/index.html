@@ -59,6 +59,7 @@
       </h3>
 
       <article class="blog-post">
+      <!--Post Header-->
       {% for new in news %}
         <a href="{{ new.link }}" style="color: currentColor;">
           <h2 class="">{{ new.title }}</h2>
@@ -75,15 +76,24 @@
           {% endif %}
           • <a href="">{{ new.source_id }}</a>
         </p>
-
-        <p>
-          {% if new.description %}
-            {{ new.description }}
-          {% else %}
-            keywords: {% for keyword in new.keywords %}'{{ keyword }}' {% endfor %}
+        <!--Post Body-->
+        <div class="row">
+          {% if new.image_url %}
+          <div class="col-md-5">
+            <img src="{{ new.image_url }}" class="image-fluid w-100 pb-3" alt="">
+          </div>
           {% endif %}
-        </p>
-        <a href="{{ new.link }}">Continue reading</a>
+          <div class="{% if new.image_url %}col-md-7{% endif %}">
+            <p>
+              {% if new.description %}
+                {{ new.description }}
+              {% else %}
+                keywords: {% for keyword in new.keywords %}'{{ keyword }}' {% endfor %}
+              {% endif %}
+            </p>
+            <a href="{{ new.link }}">Continue reading</a>
+          </div>
+        </div>
 
         <hr>
       {% endfor %}
