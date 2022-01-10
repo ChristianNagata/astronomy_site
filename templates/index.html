@@ -61,7 +61,7 @@
       <article class="blog-post">
       <!--Post Header-->
       {% for new in news %}
-        <a href="{{ new.link }}" style="color: currentColor;">
+        <a href="{{ new.link }}" style="color: currentColor; text-decoration: none;">
           <h2 class="">{{ new.title }}</h2>
         </a>
         <p class="blog-post-meta">
@@ -80,15 +80,13 @@
         <div class="row">
           {% if new.image_url %}
           <div class="col-md-5">
-            <img src="{{ new.image_url }}" class="image-fluid w-100 pb-3" alt="">
+            <img src="{{ new.image_url }}" style="height: 250px; object-fit: cover;" class="image-fluid w-100 shadow-sm rounded" alt="">
           </div>
           {% endif %}
           <div class="{% if new.image_url %}col-md-7{% endif %}">
             <p>
               {% if new.description %}
                 {{ new.description }}
-              {% else %}
-                keywords: {% for keyword in new.keywords %}'{{ keyword }}' {% endfor %}
               {% endif %}
             </p>
             <a href="{{ new.link }}">Continue reading</a>
