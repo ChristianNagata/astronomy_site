@@ -2,23 +2,6 @@
 {% load static %}
 
 
-{% block header %}
-  <!--Carousel-->
-  <div id="carouselExampleCaptions" class="carousel" data-bs-ride="carousel">
-    <div class="carousel-inner mb-4">
-      <div class="carousel-item active">
-        <img src="{% static 'assets/img/NASA-banner.jpg' %}" class="d-block w-100 rounded img-banner" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-            <div class="col-md-8 px-0" style="text-align: left;">
-              <h1 class="display-4 fst-italic">Astronomy Picture of the Day</h1>
-              <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
-            </div>
-        </div>
-      </div>
-  </div>
-{% endblock header %}
-
-
 {% block content %}
   <article class="blog-post">
     <div class="col">

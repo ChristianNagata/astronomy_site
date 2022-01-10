@@ -2,30 +2,14 @@
 {% load static %}
 
 
-{% block header %}
-  <!--Carousel-->
-  <div id="carouselExampleCaptions" class="carousel" data-bs-ride="carousel">
-    <div class="carousel-inner mb-4">
-      <div class="carousel-item active">
-        <img src="{% static 'assets/img/NASA-banner.jpg' %}" class="d-block w-100 rounded img-banner" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-            <div class="col-md-8 px-0" style="text-align: left;">
-              <h1 class="display-4 fst-italic">Mars Rover Photos</h1>
-              <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
-            </div>
-        </div>
-      </div>
-  </div>
-{% endblock header %}
-
 {% block content %}
 <!-- Gallery -->
 <div class="row">
 {% for photo in mrp %}
     <div class="col-md-2 mb-4 mb-lg-0">
-        <a href="" ><img
+        <a href="{% url 'mars_rover_photo' photo.id %}" ><img
             src="{{ photo.img_src }}"
-            class="w-100 shadow-1-strong rounded mb-4"
+            class="w-100 rounded mb-4"
             alt=""
         /></a>
     </div>

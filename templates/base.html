@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.84.0">
-        <title>{{ page_name }} | The Astronomy.</title>
+        <title>{{ page_info.name }} | The Astronomy.</title>
 
         <link rel="icon" type="imagem/png" href="{% static 'assets/img/icon.ico' %}" />
         <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/">
@@ -43,9 +43,6 @@
         <!-- Custom styles for this template -->
         <link href="{% static 'css/blog.css' %}" rel="stylesheet">
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
     </head>
 
   <body>
@@ -87,8 +84,19 @@
     </div>
 
     <main class="container">
-        {% block header %}
-        {% endblock header %}
+        <!--Carousel-->
+        <div id="carouselExampleCaptions" class="carousel" data-bs-ride="carousel">
+            <div class="carousel-inner mb-4">
+            <div class="carousel-item active">
+                <img src="{% static 'assets/img/NASA-banner.jpg' %}" class="d-block w-100 rounded img-banner" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="col-md-8 px-0" style="text-align: left;">
+                    <h1 class="display-4 fst-italic">{{ page_info.title }}</h1>
+                    <p class="lead my-3">{{ page_info.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         {% block content %}
         {% endblock content %}
