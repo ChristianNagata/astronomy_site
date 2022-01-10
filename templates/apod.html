@@ -26,7 +26,11 @@
     </div>
     <div class="col">
       <h2 class="blog-post-title pt-5">{{ apod.title }}</h2>
-      <p class="blog-post-meta pb-4 mb-4 border-bottom">{{ apod.date }} by <a href="#">{{ apod.copyright }}</a></p>
+      <p class="blog-post-meta pb-4 mb-4 border-bottom">{{ apod.date }} 
+        {% if apod.copyright %}
+          by <a href="#">{{ apod.copyright }}</a>
+        {% endif %}
+      </p>
     </div>
     <p>{{ apod.explanation }}</p>
   </article>

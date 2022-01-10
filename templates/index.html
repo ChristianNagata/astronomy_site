@@ -60,16 +60,19 @@
 
       <article class="blog-post">
       {% for new in news %}
-        <a href="{{ new.link }}" style="text-decoration:none; color: currentColor;">
+        <a href="{{ new.link }}" style="color: currentColor;">
           <h2 class="">{{ new.title }}</h2>
         </a>
         <p class="blog-post-meta">
-          {{ new.pubDate }} by 
-          {% for creator in new.creator %}
-            <a href="#">
-              {{ creator }} 
-            </a> 
-          {% endfor %} 
+          {{ new.pubDate }} 
+          {% if new.creator %}
+            by  
+            {% for creator in new.creator %}
+              <a href="#">
+                {{ creator }} 
+              </a> 
+            {% endfor %} 
+          {% endif %}
           • <a href="">{{ new.source_id }}</a>
         </p>
 
@@ -80,6 +83,8 @@
             keywords: {% for keyword in new.keywords %}'{{ keyword }}' {% endfor %}
           {% endif %}
         </p>
+        <a href="{{ new.link }}">Continue reading</a>
+
         <hr>
       {% endfor %}
 
