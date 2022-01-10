@@ -23,15 +23,21 @@
     <!--1 Card-->
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
+        <div class="col-md-8 p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-primary">APOD</strong>
           <h3 class="mb-0">Astronomy Picture of the Day</h3>
           <div class="mb-1 text-muted">Updated: {{ apod.date }}</div>
           <p class="card-text mb-auto">One of the most popular websites at NASA is the Astronomy Picture of the Day.</p>
           <a href="{% url 'apod' %}" class="stretched-link">Continue reading</a>
         </div>
-        <div class="col-auto d-none d-lg-block">
-          <img src="{{ apod.hdurl }}" width="200" height="250" style="object-fit: cover;" alt="">
+        <div class="col-md-4 d-none d-lg-block">
+          {% if apod.media_type == 'video' %}
+            <iframe class="w-100 image-fluid" height="250"
+              src="{{ apod.url }}">
+            </iframe> 
+          {% else %}
+            <img src="{{ apod.hdurl }}" class="w-100 rounded img-fluid" alt="">
+          {% endif %}
         </div>
       </div>
     </div>
@@ -39,14 +45,14 @@
     <!--2 Card-->
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
+        <div class="col-md-8 p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success">Mars Photos</strong>
           <h3 class="mb-0">Mars Rover Photos</h3>
           <div class="mb-1 text-muted">Updated: Nov 11</div>
           <p class="mb-auto">Image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars.</p>
           <a href="{% url 'mars_rover_photos' %}" class="stretched-link">Continue reading</a>
         </div>
-        <div class="col-auto d-none d-lg-block">
+        <div class="col-md-4 d-none d-lg-block">
           <img src="{% static 'assets/img/Curiosity.jpg' %}" width="200" height="250" style="object-fit: cover;" alt="">
       </div>
     </div>

@@ -22,7 +22,13 @@
 {% block content %}
   <article class="blog-post">
     <div class="col">
-      <img src="{{ apod.hdurl }}" class="w-100 rounded img-fluid" alt="">
+      {% if apod.media_type == 'video' %}
+        <iframe class="w-100 image-fluid" height="650"
+          src="{{ apod.url }}">
+        </iframe> 
+      {% else %}
+        <img src="{{ apod.hdurl }}" class="w-100 rounded img-fluid" alt="">
+      {% endif %}
     </div>
     <div class="col">
       <h2 class="blog-post-title pt-5">{{ apod.title }}</h2>
