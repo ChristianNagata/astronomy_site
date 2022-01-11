@@ -25,7 +25,7 @@ def index(request):
 
 
 def apod(request):
-    """Fotos atronômicas do dia"""
+    """Foto atronômica do dia"""
 
     info = NasaAPI()
     info = info.apod_api()
@@ -84,3 +84,25 @@ def mars_rover_photo(request, photo_id):
         }
     }
     return render(request, 'mars_rover_photo.html', context)
+
+
+def neows(request):
+    """NeoWs (Near Earth Object Web Service)"""
+
+    info = NasaAPI()
+    info = info.neows_api()
+
+    # Reorganizando json
+    objects = []
+    for key, value in info.items():
+        objects.append(value)
+
+    context = {
+        'objects': objects,
+        'page_info': {
+            'name': 'Mars Rover Photo',
+            'title': 'Mars Rover Photo',
+            'description': 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.'
+        }
+    }
+    return render(request, 'neows.html', context)

@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime
 
 
 class NasaAPI:
@@ -23,6 +24,20 @@ class NasaAPI:
         mrp = mrp.json()
         mrp = mrp['photos']
         return mrp
+
+    def neows_api(self):
+        """Near Earth Objects"""
+
+        today = datetime.today().strftime('%Y-%m-%d')
+        start_date = today
+
+        neows = requests.get(
+            f'https://api.nasa.gov/neo/rest/v1/feed?start_date={start_date}&api_key={self.api_key}')
+        neows = neows.json()
+
+        dates = neows['near_earth_objects']
+
+        return dates
 
 
 class NewsAPI:

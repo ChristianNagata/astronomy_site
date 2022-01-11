@@ -29,16 +29,32 @@
 
     <!--2 Card-->
     <div class="col-md-6">
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col-md-8 p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success">Mars Photos</strong>
-          <h3 class="mb-0">Mars Rover Photos</h3>
-          <div class="mb-1 text-muted"></div>
-          <p class="mb-auto">Image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars.</p>
-          <a href="{% url 'mars_rover_photos' %}" class="stretched-link">Continue reading</a>
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col-md-8 p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-success">Mars Photos</strong>
+            <h3 class="mb-0">Mars Rover Photos</h3>
+            <div class="mb-1 text-muted"></div>
+            <p class="mb-auto">Image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars.</p>
+            <a href="{% url 'mars_rover_photos' %}" class="stretched-link">Continue reading</a>
+          </div>
+          <div class="col-md-4 d-none d-lg-block">
+            <img src="{% static 'assets/img/Curiosity.jpg' %}" class="" style="object-fit: cover;" height="250" width="230" alt="">
         </div>
-        <div class="col-md-4 d-none d-lg-block">
-          <img src="{% static 'assets/img/Curiosity.jpg' %}" class="" style="object-fit: cover;" height="250" width="230" alt="">
+      </div>
+    </div>
+
+  <!--3 Card-->
+  <div class="col-md-6">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col-md-8 p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-success">NeoWs</strong>
+        <h3 class="mb-0">Near Earth Object Web Service</h3>
+        <div class="mb-1 text-muted"></div>
+        <p class="mb-auto">NeoWs (Near Earth Object Web Service) is a RESTful web service for near earth Asteroid information.</p>
+        <a href="{% url 'neows' %}" class="stretched-link">Continue reading</a>
+      </div>
+      <div class="col-md-4 d-none d-lg-block">
+        <img src="{% static 'assets/img/dontlookup.jpg' %}" class="" style="object-fit: cover;" height="250" width="230" alt="">
       </div>
     </div>
   </div>
@@ -51,41 +67,42 @@
 
       <article class="blog-post">
       <!--Post Header-->
-      {% for new in news %}
-        <a href="{{ new.link }}" style="color: currentColor; text-decoration: none;">
-          <h2 class="">{{ new.title }}</h2>
-        </a>
-        <p class="blog-post-meta">
-          {{ new.pubDate }} 
-          {% if new.creator %}
-            by  
-            {% for creator in new.creator %}
-              <a href="#">
-                {{ creator }} 
-              </a> 
-            {% endfor %} 
-          {% endif %}
-          • <a href="">{{ new.source_id }}</a>
-        </p>
-        <!--Post Body-->
-        <div class="row">
-          {% if new.image_url %}
-          <div class="col-md-5">
-            <img src="{{ new.image_url }}" style="height: 250px; object-fit: cover;" class="image-fluid w-100 shadow-sm rounded" alt="">
+      {% if news %}
+        {% for new in news %}
+          <a href="{{ new.link }}" style="color: currentColor; text-decoration: none;">
+            <h2 class="">{{ new.title }}</h2>
+          </a>
+          <p class="blog-post-meta">
+            {{ new.pubDate }} 
+            {% if new.creator %}
+              by  
+              {% for creator in new.creator %}
+                <a href="#">
+                  {{ creator }} 
+                </a> 
+              {% endfor %} 
+            {% endif %}
+            • <a href="">{{ new.source_id }}</a>
+          </p>
+          <!--Post Body-->
+          <div class="row">
+            {% if new.image_url %}
+            <div class="col-md-5">
+              <img src="{{ new.image_url }}" style="height: 250px; object-fit: cover;" class="image-fluid w-100 shadow-sm rounded" alt="">
+            </div>
+            {% endif %}
+            <div class="{% if new.image_url %}col-md-7{% endif %}">
+              <p>
+                {% if new.description %}
+                  {{ new.description }}
+                {% endif %}
+              </p>
+              <a href="{{ new.link }}">Continue reading</a>
+            </div>
           </div>
-          {% endif %}
-          <div class="{% if new.image_url %}col-md-7{% endif %}">
-            <p>
-              {% if new.description %}
-                {{ new.description }}
-              {% endif %}
-            </p>
-            <a href="{{ new.link }}">Continue reading</a>
-          </div>
-        </div>
-
-        <hr>
-      {% endfor %}
+          <hr>
+        {% endfor %}
+      {% endif %}
 
       <nav class="blog-pagination" aria-label="Pagination">
         <a class="btn btn-outline-primary" href="#">Older</a>

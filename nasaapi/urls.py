@@ -7,4 +7,5 @@ urlpatterns = [
     path('MarsRoverPhotos/', views.mars_rover_photos, name='mars_rover_photos'),
     path('MarsRoverPhotos/<int:photo_id>/',
          views.mars_rover_photo, name='mars_rover_photo'),
+    path('neows/', views.neows, name='neows'),
 ]
