@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from .apis import *
 from django.core.paginator import Paginator
-from types import SimpleNamespace
-import json
 
 
 def index(request):
@@ -71,6 +69,7 @@ def mars_rover_photo(request, photo_id):
     info = NasaAPI()
     info = info.mrp_api()
 
+    # Seleciona a foto de id = photo_id
     for photo in info:
         if photo['id'] == photo_id:
             info = photo

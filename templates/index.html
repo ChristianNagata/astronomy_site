@@ -21,7 +21,7 @@
               src="{{ apod.url }}">
             </iframe> 
           {% else %}
-            <img src="{{ apod.hdurl }}" class="w-100 rounded img-fluid" alt="">
+            <img src="{{ apod.hdurl }}" class="" style="object-fit: cover;" height="250" width="230" alt="">
           {% endif %}
         </div>
       </div>
@@ -38,7 +38,7 @@
           <a href="{% url 'mars_rover_photos' %}" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-md-4 d-none d-lg-block">
-          <img src="{% static 'assets/img/Curiosity.jpg' %}" style="object-fit: cover;" height="250" alt="">
+          <img src="{% static 'assets/img/Curiosity.jpg' %}" class="" style="object-fit: cover;" height="250" width="230" alt="">
       </div>
     </div>
   </div>
@@ -99,7 +99,7 @@
         <div class="p-4 mb-3 bg-light rounded">
           <h4 class="fst-italic">About</h4>
           <p class="mb-0">Site based on NASA Open APIs.</p>
-          <p class="mb-0">Find more about on <a href="https://api.nasa.gov/">https://api.nasa.gov/</a>.</p>
+          <p class="mb-0">Find more on <a href="https://api.nasa.gov/">https://api.nasa.gov/</a>.</p>
         </div>
 
         <div class="p-4">

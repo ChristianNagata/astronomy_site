@@ -43,6 +43,12 @@
         <!-- Custom styles for this template -->
         <link href="{% static 'css/blog.css' %}" rel="stylesheet">
 
+        <!--Incluso no snippet
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+        -->
+
     </head>
 
   <body>
@@ -67,36 +73,29 @@
         <!--Options navbar-->
         <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between">
-            <a class="p-2 link-secondary" href="#">World</a>
-            <a class="p-2 link-secondary" href="#">U.S.</a>
-            <a class="p-2 link-secondary" href="#">Technology</a>
-            <a class="p-2 link-secondary" href="#">Design</a>
-            <a class="p-2 link-secondary" href="#">Culture</a>
-            <a class="p-2 link-secondary" href="#">Business</a>
-            <a class="p-2 link-secondary" href="#">Politics</a>
-            <a class="p-2 link-secondary" href="#">Opinion</a>
-            <a class="p-2 link-secondary" href="#">Science</a>
-            <a class="p-2 link-secondary" href="#">Health</a>
-            <a class="p-2 link-secondary" href="#">Style</a>
-            <a class="p-2 link-secondary" href="#">Travel</a>
+                <a class="p-2 link-secondary" href="{% url 'mars_rover_photos' %}">Mars Rover Photos</a>
+                <a class="p-2 link-secondary" href="{% url 'apod' %}">Astronomy Picture of the Day</a>
+                <a class="p-2 link-secondary" href="#">Latest News</a>
             </nav>
         </div>
     </div>
 
     <main class="container">
-        <!--Carousel-->
-        <div id="carouselExampleCaptions" class="carousel" data-bs-ride="carousel">
-            <div class="carousel-inner mb-4">
-            <div class="carousel-item active">
-                <img src="{% static 'assets/img/NASA-banner.jpg' %}" class="d-block w-100 rounded img-banner" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <div class="col-md-8 px-0" style="text-align: left;">
-                    <h1 class="display-4 fst-italic">{{ page_info.title }}</h1>
-                    <p class="lead my-3">{{ page_info.description }}</p>
+        {% if page_info.name != 'Mars Rover Photo' %}
+            <!--Carousel-->
+            <div id="carouselExampleCaptions" class="carousel" data-bs-ride="carousel">
+                <div class="carousel-inner mb-4">
+                <div class="carousel-item active">
+                    <img src="{% static 'assets/img/NASA-banner.jpg' %}" class="d-block w-100 rounded img-banner" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="col-md-8 px-0" style="text-align: left;">
+                        <h1 class="display-4 fst-italic">{{ page_info.title }}</h1>
+                        <p class="lead my-3">{{ page_info.description }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
 
         {% block content %}
         {% endblock content %}
