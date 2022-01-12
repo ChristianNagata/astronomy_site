@@ -28,16 +28,34 @@ class NasaAPI:
     def neows_api(self):
         """Near Earth Objects"""
 
-        today = datetime.today().strftime('%Y-%m-%d')
-        start_date = today
-
         neows = requests.get(
-            f'https://api.nasa.gov/neo/rest/v1/feed?start_date={start_date}&api_key={self.api_key}')
+            f'https://api.nasa.gov/neo/rest/v1/feed?detailed=true&api_key={self.api_key}')
         neows = neows.json()
+        near_objs = neows['near_earth_objects']
 
-        dates = neows['near_earth_objects']
+        return near_objs
 
-        return dates
+    def neows_general(self):
+        """Near Earth Objects count"""
+
+        info = self.neows_api()
+        dates = info.keys()
+
+        objects = []
+        for date in dates:
+            for obj in info[date]:
+                objects.append(obj)
+        objs_count = len(objects)
+
+        def byHazardous(e):
+            return e['is_potentially_hazardous_asteroid']
+        objects.sort(reverse=True, key=byHazardous)
+        haz_count = 0
+        for obj in objects:
+            if obj['is_potentially_hazardous_asteroid']:
+                haz_count += 1
+
+        return {'count': objs_count, 'haz_count': haz_count}
 
 
 class NewsAPI:

@@ -3,11 +3,135 @@
 
 
 {% block content %}
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Objects count</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Potentially hazardous</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ haz_count }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Close approach date</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Biggest object</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- DataTales -->
 
-    {% for obj in objects %}
-        {{ obj }}
-    {% endfor %}
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Estimated diameter (m)</th>
+                    <th>Approach date</th>
+                    <th>Velocity (km/h)</th>
+                    <th>Orbiting body</th>
+                    <th>Potentially hazardous</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Estimated diameter (m)</th>
+                    <th>Approach date</th>
+                    <th>Velocity (km/h)</th>
+                    <th>Orbiting body</th>
+                    <th>Potentially hazardous</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% for obj in objects %}
+                    <tr>
+                        <td>{{ obj.name }}</td>
+                        <td>
+                            {{ obj.estimated_diameter.meters.estimated_diameter_min|stringformat:".2f" }} to 
+                            {{ obj.estimated_diameter.meters.estimated_diameter_max|stringformat:".2f" }}
+                        </td>
+                        <td>
+                            {% for data in obj.close_approach_data %}
+                                {{ data.close_approach_date_full }}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for data in obj.close_approach_data %}
+                                {{ data.relative_velocity.kilometers_per_hour }}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for data in obj.close_approach_data %}
+                                {{ data.orbiting_body }}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% if obj.is_potentially_hazardous_asteroid %}
+                                <p>True <span class="badge bg-warning rounded-pill">!</span></p>
+                            {% else %}
+                                <p>False</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+
+    
 
 
 {% endblock content %}

@@ -7,13 +7,15 @@ def index(request):
     """Página inicial"""
 
     info = NasaAPI()
-    info = info.apod_api()
+    apod = info.apod_api()
+    newos_general = info.neows_general()
 
     news = NewsAPI()
     news = news.news_api()
 
     context = {
-        'apod': info,
+        'apod': apod,
+        'objs_count': newos_general['count'],
         'news': news,
         'page_info': {
             'name': 'Home',
@@ -90,18 +92,29 @@ def neows(request):
     """NeoWs (Near Earth Object Web Service)"""
 
     info = NasaAPI()
-    info = info.neows_api()
+    info_api = info.neows_api()
+    dates = info_api.keys()
 
-    # Reorganizando json
     objects = []
-    for key, value in info.items():
-        objects.append(value)
+    for date in dates:
+        for obj in info_api[date]:
+            objects.append(obj)
+
+    # Ordenando a lista por periculosidade
+    def byHazardous(e):
+        return e['is_potentially_hazardous_asteroid']
+    objects.sort(reverse=True, key=byHazardous)
+
+    # Objects count
+    newos_general = info.neows_general()
 
     context = {
         'objects': objects,
+        'count': newos_general['count'],
+        'haz_count': newos_general['haz_count'],
         'page_info': {
-            'name': 'Mars Rover Photo',
-            'title': 'Mars Rover Photo',
+            'name': 'NeoWs',
+            'title': 'Near Earth Objects Web Service',
             'description': 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.'
         }
     }
