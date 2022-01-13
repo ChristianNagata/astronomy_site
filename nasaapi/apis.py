@@ -31,31 +31,59 @@ class NasaAPI:
         neows = requests.get(
             f'https://api.nasa.gov/neo/rest/v1/feed?detailed=true&api_key={self.api_key}')
         neows = neows.json()
-        near_objs = neows['near_earth_objects']
+        near_objs = neows
 
         return near_objs
 
-    def neows_general(self):
-        """Near Earth Objects count"""
 
-        info = self.neows_api()
-        dates = info.keys()
+class GeneralInfo:
+    def __init__(self):
+        self.info = NasaAPI()
 
+    def all(self):
+        info_newos = self.info.neows_api()
+        info_api = info_newos['near_earth_objects']
+
+        dates = info_api.keys()
         objects = []
         for date in dates:
-            for obj in info[date]:
+            for obj in info_api[date]:
                 objects.append(obj)
-        objs_count = len(objects)
+        return objects
 
-        def byHazardous(e):
-            return e['is_potentially_hazardous_asteroid']
-        objects.sort(reverse=True, key=byHazardous)
+    def count(self):
+        """Total of near objects"""
+        info_newos = self.info.neows_api()
+        info_newos = info_newos['element_count']
+        return info_newos
+
+    def hazardous(self):
+        """Total of hazardous objects"""
+        objects = self.all()
         haz_count = 0
         for obj in objects:
             if obj['is_potentially_hazardous_asteroid']:
                 haz_count += 1
+        return haz_count
 
-        return {'count': objs_count, 'haz_count': haz_count}
+    def biggest(self):
+        """The biggest object"""
+        objects = self.all()
+
+        def bySize(e):
+            return e['estimated_diameter']['meters']['estimated_diameter_max']
+        objects.sort(reverse=True, key=bySize)
+        biggest = objects[0]
+        return biggest
+
+    def approach(self):
+        """Close approach date"""
+        objects = self.all()
+
+        objects.sort(key=lambda x: datetime.strptime(
+            x['close_approach_data'][0]['close_approach_date'], '%Y-%m-%d'))
+        close = objects[0]
+        return close['close_approach_data'][0]['close_approach_date_full']
 
 
 class NewsAPI:

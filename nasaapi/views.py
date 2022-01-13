@@ -7,15 +7,16 @@ def index(request):
     """Página inicial"""
 
     info = NasaAPI()
-    apod = info.apod_api()
-    newos_general = info.neows_general()
-
     news = NewsAPI()
+    general = GeneralInfo()
+
+    apod = info.apod_api()
     news = news.news_api()
+    general_info = general.count()
 
     context = {
         'apod': apod,
-        'objs_count': newos_general['count'],
+        'objs_count': general_info,
         'news': news,
         'page_info': {
             'name': 'Home',
@@ -92,26 +93,30 @@ def neows(request):
     """NeoWs (Near Earth Object Web Service)"""
 
     info = NasaAPI()
-    info_api = info.neows_api()
-    dates = info_api.keys()
+    general = GeneralInfo()
 
-    objects = []
-    for date in dates:
-        for obj in info_api[date]:
-            objects.append(obj)
+    info_api = info.neows_api()
+    info_api = info_api['near_earth_objects']
+
+    objects = general.all()
 
     # Ordenando a lista por periculosidade
     def byHazardous(e):
         return e['is_potentially_hazardous_asteroid']
     objects.sort(reverse=True, key=byHazardous)
 
-    # Objects count
-    newos_general = info.neows_general()
+    # Objects informations
+    count = general.count()
+    haz_count = general.hazardous()
+    biggest = general.biggest()
+    approach = general.approach()
 
     context = {
         'objects': objects,
-        'count': newos_general['count'],
-        'haz_count': newos_general['haz_count'],
+        'count': count,
+        'haz_count': haz_count,
+        'approach': approach,
+        'biggest': biggest['name'],
         'page_info': {
             'name': 'NeoWs',
             'title': 'Near Earth Objects Web Service',

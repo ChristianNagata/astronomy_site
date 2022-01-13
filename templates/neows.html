@@ -3,9 +3,11 @@
 
 
 {% block content %}
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success h-100 py-2">
+            <div class="card h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -13,15 +15,12 @@
                                 Objects count</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count }}</div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success h-100 py-2">
+            <div class="card h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -29,40 +28,31 @@
                                 Potentially hazardous</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ haz_count }}</div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success h-100 py-2">
+            <div class="card h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Close approach date</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ approach }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success h-100 py-2">
+            <div class="card h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Biggest object</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ biggest }}</div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +63,7 @@
     <!-- DataTales -->
 
     <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered sortable" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>Name</th>
