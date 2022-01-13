@@ -12,16 +12,18 @@ def index(request):
 
     apod = info.apod_api()
     news = news.news_api()
+    weather = info.insight_api()
     general_info = general.count()
 
     context = {
         'apod': apod,
         'objs_count': general_info,
         'news': news,
+        'weather': weather['AT'],
         'page_info': {
             'name': 'Home',
-            'title': 'Stay informed about the Universe',
-            'description': 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.'
+            'title': 'Welcome to The Astronomy.',
+            'description': 'The objective of this site is to make NASA APIs, including imagery, eminently accessible to educators, and citizen scientists.'
         }
     }
     return render(request, 'index.html', context)
@@ -38,7 +40,7 @@ def apod(request):
         'page_info': {
             'name': 'APOD',
             'title': 'Astronomy Picture of the Day',
-            'description': 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.'
+            'description': 'One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact, this website is one of the most popular websites across all federal agencies. It has the popular appeal of a Justin Bieber video.'
         }
     }
     return render(request, 'apod.html', context)
@@ -60,7 +62,7 @@ def mars_rover_photos(request):
         'page_info': {
             'name': 'Mars Rover Photos',
             'title': 'Mars Rover Photos',
-            'description': 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.'
+            'description': "This API is designed to collect image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars and make it more easily available to other developers, educators, and citizen scientists."
         }
     }
     return render(request, 'mars_rover_photos.html', context)
@@ -83,7 +85,7 @@ def mars_rover_photo(request, photo_id):
         'page_info': {
             'name': 'Mars Rover Photo',
             'title': 'Mars Rover Photo',
-            'description': 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.'
+            'description': "This API is designed to collect image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars and make it more easily available to other developers, educators, and citizen scientists."
         }
     }
     return render(request, 'mars_rover_photo.html', context)

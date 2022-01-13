@@ -6,11 +6,11 @@
   <article class="blog-post">
     <div class="col">
       {% if apod.media_type == 'video' %}
-        <iframe class="w-100 image-fluid" height="650"
+        <iframe class="w-100 image-fluid shadow-sm" height="650"
           src="{{ apod.url }}">
         </iframe> 
       {% else %}
-        <img src="{{ apod.hdurl }}" class="w-100 rounded img-fluid" alt="">
+        <img src="{{ apod.hdurl }}" class="w-100 rounded img-fluid shadow-sm" alt="">
       {% endif %}
     </div>
     <div class="col">

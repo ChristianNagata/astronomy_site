@@ -7,7 +7,7 @@
 
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card h-100 py-2">
+            <div class="card h-100 py-2 shadow-sm">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card h-100 py-2">
+            <div class="card h-100 py-2 shadow-sm">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card h-100 py-2">
+            <div class="card h-100 py-2 shadow-sm">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card h-100 py-2">
+            <div class="card h-100 py-2 shadow-sm">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -63,7 +63,7 @@
     <!-- DataTales -->
 
     <div class="table-responsive">
-        <table class="table table-bordered sortable" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered sortable shadow-sm" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -87,7 +87,7 @@
             <tbody>
                 {% for obj in objects %}
                     <tr>
-                        <td>{{ obj.name }}</td>
+                        <td><p>{{ obj.name }}</p></td>
                         <td>
                             {{ obj.estimated_diameter.meters.estimated_diameter_min|stringformat:".2f" }} to 
                             {{ obj.estimated_diameter.meters.estimated_diameter_max|stringformat:".2f" }}

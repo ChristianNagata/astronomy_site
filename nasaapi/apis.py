@@ -1,3 +1,4 @@
+from audioop import reverse
 import requests
 from datetime import datetime
 
@@ -34,6 +35,20 @@ class NasaAPI:
         near_objs = neows
 
         return near_objs
+
+    def insight_api(self):
+        """Mars Weather"""
+
+        info = requests.get(
+            'https://mars.nasa.gov/rss/api/?feed=weather&category=insight_temperature&feedtype=json&ver=1.0')
+        info = info.json()
+
+        sol_keys = info['sol_keys']
+        sol_keys.sort(reverse=True)
+        last_key = sol_keys[0]
+
+        weather = info[last_key]
+        return weather
 
 
 class GeneralInfo:
