@@ -49,6 +49,7 @@
         <div class="col-md-8 p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-danger">Mars Photos</strong>
           <h3 class="mb-0">Mars Rover Photos</h3>
+          <div class="mb-1 text-muted">Latest photos</div>
           <div class="mb-1 text-muted"></div>
           <p class="mb-auto">Image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars.</p>
           <a href="{% url 'mars_rover_photos' %}" class="stretched-link">Continue reading</a>
@@ -65,8 +66,9 @@
         <div class="col-md-8 p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-warning">InSight</strong>
           <h3 class="mb-0">Mars Weather</h3>
+          <div class="mb-1 text-muted">Latest Weather at Elysium Planitia</div>
           <div class="mb-1 text-muted"></div>
-          <p class="mb-auto">NASA’s InSight Mars lander takes continuous weather measurements (temperature, wind, pressure) on the surface of Mars at Elysium Planitia.</p>
+          <p class="mb-auto">NASA’s InSight Mars lander takes continuous weather measurements.</p>
           <strong class="d-inline-block mb-2 text-primary">High: {{ weather.mx|stringformat:".1f" }} °C - Low: {{ weather.mn|stringformat:".1f" }} °C</strong>
         </div>
         <div class="col-md-4 d-none d-lg-block">

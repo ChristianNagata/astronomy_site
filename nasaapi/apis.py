@@ -19,11 +19,11 @@ class NasaAPI:
 
     def mrp_api(self):
         """Mars Rover Photos"""
-
+        rover = 'curiosity'
         mrp = requests.get(
-            f'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key={self.api_key}')
+            f'https://api.nasa.gov/mars-photos/api/v1/rovers/{rover}/latest_photos?api_key={self.api_key}')
         mrp = mrp.json()
-        mrp = mrp['photos']
+        mrp = mrp['latest_photos']
         return mrp
 
     def neows_api(self):
